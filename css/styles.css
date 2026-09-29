@@ -234,6 +234,148 @@ h3 {
 }
 
 /* =========================================================
+   Featured projects carousel
+   ========================================================= */
+#featured-projects .projects-carousel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#featured-projects .carousel-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+#featured-projects .carousel-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+#featured-projects .carousel-btn:hover:not(:disabled) {
+  background: var(--accent-dark);
+  box-shadow: 0 0 22px rgba(224, 122, 31, 0.45);
+}
+
+#featured-projects .carousel-btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+#featured-projects .carousel-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#featured-projects .projects-grid {
+  display: block;
+  justify-items: normal;
+  --per: 3;
+  --gap: 1.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding: 0.75rem 0 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(224, 122, 31, 0.45) transparent;
+  touch-action: pan-y;
+}
+
+#featured-projects .projects-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+#featured-projects .projects-grid::-webkit-scrollbar-thumb {
+  background: rgba(224, 122, 31, 0.45);
+  border-radius: 3px;
+}
+
+#featured-projects .projects-grid:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+#featured-projects .projects-rail {
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: var(--gap);
+}
+
+/* JS-enhanced infinite carousel: the rail moves with transform, no native scrolling */
+#featured-projects .projects-grid.is-infinite {
+  overflow: hidden;
+  scroll-snap-type: none;
+}
+
+#featured-projects .projects-grid.is-infinite .projects-rail {
+  transition: transform 0.45s ease;
+  will-change: transform;
+}
+
+#featured-projects .projects-grid.is-infinite .projects-rail.no-anim {
+  transition: none;
+}
+
+#featured-projects .project-card {
+  flex: 0 0 auto;
+  width: calc((100% - (var(--per) - 1) * var(--gap)) / var(--per));
+  max-width: none;
+  padding: 1.5rem 1.25rem;
+  scroll-snap-align: start;
+}
+
+#featured-projects .project-card-actions {
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+#featured-projects .project-card-actions .btn {
+  flex: 0 1 auto;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 991.98px) {
+  #featured-projects .projects-grid {
+    --per: 2;
+  }
+}
+
+@media (max-width: 767.98px) {
+  #featured-projects .projects-grid {
+    --per: 1;
+  }
+}
+
+@media (max-width: 575.98px) {
+  #featured-projects .projects-carousel-head {
+    padding-inline: 0.75rem;
+  }
+
+  #featured-projects .projects-grid {
+    margin-inline: 0.75rem;
+  }
+}
+
+/* =========================================================
    About Photo
    ========================================================= */
 .about-photo {
@@ -324,8 +466,13 @@ h3 {
    Reduced motion
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {
-  html {
+  html,
+  #featured-projects .projects-grid {
     scroll-behavior: auto;
+  }
+
+  #featured-projects .projects-grid.is-infinite .projects-rail {
+    transition: none;
   }
 
   .fade-up,

@@ -71,7 +71,6 @@
             research on atmospheric and ocean systems.
           </p>
           <p>
-            I care about the planet and want to build tools that help people understand how to better protect our environment.
             Outside of work, I sing, play and arrange music of all kinds. You can find me singing chorl music online with the <a href="https://harvardgleeclub.org/" target="_blank" rel="noopener noreferrer">Harvard Glee Club</a> across Europe and the United States, or check us out at Sanders Theatre at Harvard for our semesterly performances. Aside from choir, I also sing a cappella with the Harvard Din & Tonics on their international and domestic tours. You can find more info about the Din & Tonics <a href="https://www.dins.com/" target="_blank" rel="noopener noreferrer">here</a>.
           </p>
         </div>
@@ -88,20 +87,41 @@
     <section id="education" class="section fade-up container">
       <h2>Education</h2>
 
-      <div class="row mt-4">
-        <div class="col-md-6">
-          <h3>Harvard University</h3>
-          <p class="text-muted mb-1">Cambridge, MA &mdash; Class of 2027</p>
-          <p> A.B. Candidate in Computer Science Earth <br>
-            A.B. Candidate in Earth and Planetary Sciences.<br>
-            <strong>Cumulative GPA:</strong> 3.7
-          </p>
-          <p>
-            <strong>Relevant Coursework:</strong><br>
-            Data Structures & Algorithms, Computer Systems and Architecture, Data Science & Machine Learning, Folding Algorithms: Linkages, Origami, and Polyhedra, Foundational Science, Technology and Policy of Climate Change.
-          </p>
-        </div>
+    <div class="row mt-4">
+      <!-- Left Column: CS -->
+      <div class="col-md-6">
+        <h3>Harvard University</h3>
+        <p class="text-muted mb-1">Cambridge, MA — Class of 2027</p>
+
+        <p>
+          <strong>A.B. Candidate in Computer Science</strong><br>
+          <strong>Cumulative GPA:</strong> 3.7
+        </p>
+
+        <p>
+          <strong>Relevant Coursework:</strong><br>
+          Data Structures & Algorithms; Computer Systems and Architecture;  
+          Data Science & Machine Learning; Folding Algorithms: Linkages, Origami, and Polyhedra.
+        </p>
       </div>
+
+      <!-- Right Column: EPS -->
+      <div class="col-md-6">
+        <h3>Harvard University</h3>
+        <p class="text-muted mb-1">Cambridge, MA — Class of 2027</p>
+
+        <p>
+          <strong>A.B. Candidate in Earth & Planetary Sciences</strong><br>
+          <strong>Cumulative GPA:</strong> 3.8
+        </p>
+
+        <p>
+          <strong>Relevant Coursework:</strong><br>
+          Technology and Policy of Climate Change; Scientific Instrumentation for Climate Change; Planetary Crusts, Interstellar Materials and their Origin.
+        </p>
+      </div>
+    </div>
+
     </section>
 
     <!-- Employment -->
@@ -162,26 +182,6 @@
         </article>
 
         <article class="mb-4">
-          <h3>Guitar Hero Electric Guitar</h3>
-          <p>
-            Designed and built custom hardware instruments for Guitar Hero. This was then ran on a computer through an emulator to customize both the software and hardware. Made with 3D printing and soldering through Solidworks and CAD programs. This project was then showcased at the 2025 Engineering Fair of Harvard University.
-            Reduced latency to improve program responsiveness by 35% and redesigned the material composition and weight distribution
-            to prioritize functionality over the original marketing design. The project was endorsed by the Co-Founder of Guitar Hero.
-            You can read more about it <a href="https://seas.harvard.edu/news/engineers-play" target="_blank" rel="noopener noreferrer">here</a>.
-          </p>
-        </article>
-
-        <article class="mb-4">
-          <h3>3D Webpage for Incoming Students</h3>
-          <p>
-            Built a comprehensive guide for incoming Harvard College students, featuring links to all relevant First-Year resources and
-            3D models of rooms and floor plans rendered through LiDAR imaging and artificial reconstruction in Tinkercad.
-            Endorsed by Prof. David Malan as a <a href="https://www.youtube.com/watch?v=z1SzrQ1OyZE" target="_blank" rel="noopener noreferrer">featured project</a>
-            at the CS50 Fair, inspiring the format of acceptance pages for future students.
-          </p>
-        </article>
-
-        <article class="mb-4">
           <h3>Biotech Symposium &mdash; School to Careers Partnership</h3>
           <p>
             Shadowed a COVID-19 lab module at Novartis and modeled RNA sample detection workflows. Worked briefly with researchers in a post-COVID-19 safety lab in order to produce better detection systems for the public in the future.
@@ -237,9 +237,22 @@
 
     <!-- Work -->
     <section id="featured-projects" class="section fade-up container">
-      <h2 class="mb-4">Featured Projects</h2>
+      <div class="projects-carousel" role="region" aria-roledescription="carousel" aria-label="Featured projects">
+        <div class="projects-carousel-head mb-4">
+          <h2 class="mb-0">Featured Projects</h2>
+          <div class="carousel-controls">
+            <button type="button" class="carousel-btn carousel-prev" aria-label="Previous project" aria-controls="projects-track">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button type="button" class="carousel-btn carousel-next" aria-label="Next project" aria-controls="projects-track">
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
 
-      <div class="projects-grid">
+      <p id="projects-status" class="visually-hidden" aria-live="polite" aria-atomic="true"></p>
+      <div class="projects-grid" id="projects-track" tabindex="0" role="group" aria-label="Project cards, use the arrow keys to browse">
+        <div class="projects-rail">
 
             <article class="project-card lift fade-up">
               <h3>ChordStrikers</h3>
@@ -300,7 +313,38 @@
                 </a>
               </div>
             </article>
+            <article class="project-card lift fade-up">
+              <h3>Guitar Hero: Emulating Electrical Hardware</h3>
+              <p>
+                A custom hardware instrument set for Guitar Hero, run through an emulator and built with 3D printing,
+                soldering, and SolidWorks. Showcased at the 2025 Harvard Engineering Fair and endorsed by the Co-Founder of Guitar Hero.
+              </p>
+              <div class="project-card-actions">
+                <a href="https://seas.harvard.edu/news/engineers-play"
+                  target="_blank" rel="noopener noreferrer"
+                  class="contact-btn glow-hover lift btn">
+                  Read Article
+                </a>
+              </div>
+            </article>
+            <article class="project-card lift fade-up">
+              <h3>3D Webpage for Incoming Students</h3>
+              <p>
+                A comprehensive guide for incoming Harvard College students, with links to First-Year resources and 3D models
+                of rooms and floor plans created through LiDAR imaging and Tinkercad reconstruction. Endorsed by Prof. David Malan
+                as a featured project at the CS50 Fair, inspiring the format of acceptance pages for future students.
+              </p>
+              <div class="project-card-actions">
+                <a href="https://www.youtube.com/watch?v=z1SzrQ1OyZE"
+                  target="_blank" rel="noopener noreferrer"
+                  class="contact-btn glow-hover lift btn">
+                  Watch Demo
+                </a>
+              </div>
+            </article>
+        </div>
           </div>
+      </div>
     </section>  
 
   </main>
