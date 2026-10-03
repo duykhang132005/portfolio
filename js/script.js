@@ -1,6 +1,18 @@
 (function () {
   "use strict";
 
+  // Old single-page links (index.html#about and so on) now lead to the right page
+  var legacyAnchors = {
+    "#about": "about.html", "#education": "about.html", "#skills": "about.html",
+    "#employment": "experience.html", "#experience": "experience.html",
+    "#featured-projects": "projects.html", "#contact": "contact.html"
+  };
+  var currentPage = window.location.pathname.split("/").pop();
+  if ((currentPage === "" || currentPage === "index.html") && legacyAnchors[window.location.hash]) {
+    window.location.replace(legacyAnchors[window.location.hash] + window.location.hash);
+    return;
+  }
+
   // Year setter (null-safe)
   var yearEl = document.getElementById("year");
   if (yearEl) {

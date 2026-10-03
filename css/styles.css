@@ -104,6 +104,11 @@ body {
   text-decoration: none;
 }
 
+.nav a[aria-current="page"] {
+  color: var(--accent);
+  box-shadow: 0 2px 0 var(--accent);
+}
+
 .nav a:focus-visible,
 .btn:focus-visible,
 .contact-btn:focus-visible,
@@ -137,7 +142,8 @@ section {
   color: var(--accent-dark);
 }
 
-h2 {
+h2,
+h1.h2 {
   color: var(--accent-dark);
 }
 
@@ -366,6 +372,12 @@ h3 {
 }
 
 @media (max-width: 575.98px) {
+  /* Bootstrap rows use negative margins; .section removes the container padding, so cancel them on phones */
+  .section .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
   #featured-projects .projects-carousel-head {
     padding-inline: 0.75rem;
   }
@@ -436,6 +448,116 @@ h3 {
 }
 
 /* =========================================================
+   Multi-page extras: role lists and footer nav
+   ========================================================= */
+.role-list {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.role-list li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-nav a {
+  color: var(--accent-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.footer-nav a:hover {
+  color: var(--accent);
+}
+
+.footer-nav a[aria-current="page"] {
+  color: var(--accent);
+  box-shadow: 0 2px 0 var(--accent);
+}
+
+.footer-nav a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   Footer contact block (shared on every page) and full-height home hero
+   ========================================================= */
+.footer-contact {
+  padding: 2.5rem 0 1.5rem;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.footer-contact h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.site-footer .footer-nav {
+  margin-top: 0.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.page-home {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-home main {
+  flex: 1 0 auto;
+  display: flex;
+}
+
+.page-home .hero {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 22rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.page-home .hero-content {
+  width: 100%;
+}
+
+/* =========================================================
+   Home page background: same warm gradient as the hero, across the whole tab
+   (the body background propagates to the canvas, so overscroll matches too)
+   ========================================================= */
+.page-home {
+  background-color: var(--accent-light);
+  background-image: linear-gradient(135deg, var(--accent-light), var(--bg));
+  background-repeat: no-repeat;
+}
+
+.page-home .hero {
+  background: transparent;
+}
+
+.page-home .site-header {
+  background: rgba(255, 244, 230, 0.85);
+  border-bottom-color: transparent;
+}
+
+.page-home .site-footer {
+  background: transparent;
+  border-top-color: rgba(194, 98, 18, 0.18);
+}
+
+/* =========================================================
    Mobile nav
    ========================================================= */
 @media (max-width: 900px) {
@@ -459,6 +581,12 @@ h3 {
   .nav a {
     margin: 0.4rem 0;
     margin-left: 0;
+  }
+
+  .nav a[aria-current="page"] {
+    box-shadow: none;
+    border-left: 3px solid var(--accent);
+    padding-left: 0.5rem;
   }
 }
 
