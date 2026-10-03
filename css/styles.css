@@ -8,6 +8,8 @@
   --accent-dark: #c26212;
   --accent-light: #fff4e6;
   --muted: #6b7280;
+  --link: #0b5ed7;
+  --link-hover: #0a58ca;
   --border: #e5e7eb;
   --radius: 10px;
 }
@@ -19,9 +21,222 @@ html {
 body {
   margin: 0;
   font-family: "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
   background: var(--bg);
   color: var(--text);
   line-height: 1.7;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* =========================================================
+   Base: small reset and the few layout helpers the pages use
+   (replaces the full Bootstrap stylesheet)
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+[tabindex="-1"]:focus:not(:focus-visible) {
+  outline: 0 !important;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+}
+
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+}
+
+h2,
+.h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+
+h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+
+.h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2,
+  .h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+strong {
+  font-weight: bolder;
+}
+
+small {
+  font-size: 0.875em;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+button {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-transform: none;
+  -webkit-appearance: button;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+.container,
+.container-fluid {
+  width: 100%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container { max-width: 540px; }
+}
+
+@media (min-width: 768px) {
+  .container { max-width: 720px; }
+}
+
+@media (min-width: 992px) {
+  .container { max-width: 960px; }
+}
+
+@media (min-width: 1200px) {
+  .container { max-width: 1140px; }
+}
+
+@media (min-width: 1400px) {
+  .container { max-width: 1320px; }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -0.75rem;
+  margin-left: -0.75rem;
+}
+
+.row > * {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .col-md-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.btn {
+  display: inline-block;
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+}
+
+.d-flex { display: flex !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.justify-content-center { justify-content: center !important; }
+.align-items-center { align-items: center !important; }
+.gap-3 { gap: 1rem !important; }
+.p-0 { padding: 0 !important; }
+.mx-auto { margin-right: auto !important; margin-left: auto !important; }
+.mt-3 { margin-top: 1rem !important; }
+.mt-4 { margin-top: 1.5rem !important; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: 0.25rem !important; }
+.mb-3 { margin-bottom: 1rem !important; }
+.mb-4 { margin-bottom: 1.5rem !important; }
+.text-center { text-align: center !important; }
+.text-muted { color: rgba(33, 37, 41, 0.75) !important; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 /* =========================================================
@@ -147,10 +362,15 @@ h1.h2 {
   color: var(--accent-dark);
 }
 
-h3 {
+h3,
+.item-title {
   color: var(--accent-dark);
   font-size: 1.2rem;
   font-weight: 700;
+}
+
+.section-title {
+  font-size: 1.5rem;
 }
 
 .tagline {
@@ -220,7 +440,8 @@ h3 {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
-.project-card h3 {
+.project-card h3,
+.project-card h2.item-title {
   margin-top: 0;
   font-size: 1.3rem;
   color: var(--accent-dark);
@@ -410,12 +631,13 @@ h3 {
 /* =========================================================
    Animations
    ========================================================= */
-.scale-in {
+/* Hidden start state only when JavaScript is running (the .js class is set in the head) */
+:where(.js) .scale-in {
   opacity: 0;
   transform: scale(0.95);
 }
 
-.fade-up {
+:where(.js) .fade-up {
   opacity: 0;
   transform: translateY(20px);
 }
@@ -444,7 +666,6 @@ h3 {
   text-align: center;
   font-size: 0.9rem;
   color: var(--muted);
-  border-top: 1px solid var(--border);
 }
 
 /* =========================================================
@@ -459,34 +680,6 @@ h3 {
   margin-bottom: 0.5rem;
 }
 
-.footer-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.footer-nav a {
-  color: var(--accent-dark);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.footer-nav a:hover {
-  color: var(--accent);
-}
-
-.footer-nav a[aria-current="page"] {
-  color: var(--accent);
-  box-shadow: 0 2px 0 var(--accent);
-}
-
-.footer-nav a:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 3px;
-}
-
 /* =========================================================
    Footer contact block (shared on every page) and full-height home hero
    ========================================================= */
@@ -499,12 +692,6 @@ h3 {
 .footer-contact h2 {
   font-size: 1.75rem;
   font-weight: 700;
-}
-
-.site-footer .footer-nav {
-  margin-top: 0.5rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--border);
 }
 
 .page-home {
@@ -554,7 +741,38 @@ h3 {
 
 .page-home .site-footer {
   background: transparent;
-  border-top-color: rgba(194, 98, 18, 0.18);
+}
+
+/* =========================================================
+   Contact page: the Get to Know Me block is the main content of the screen
+   ========================================================= */
+.page-contact {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-contact main {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.page-contact #contact {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.page-contact #contact h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--accent-dark);
+}
+
+.page-contact #contact p {
+  font-size: 1.25rem;
+  color: var(--muted);
 }
 
 /* =========================================================

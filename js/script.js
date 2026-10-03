@@ -8,9 +8,17 @@
     "#featured-projects": "projects.html", "#contact": "contact.html"
   };
   var currentPage = window.location.pathname.split("/").pop();
-  if ((currentPage === "" || currentPage === "index.html") && legacyAnchors[window.location.hash]) {
+  if ((currentPage === "" || currentPage === "index" || currentPage === "index.html") && legacyAnchors[window.location.hash]) {
     window.location.replace(legacyAnchors[window.location.hash] + window.location.hash);
     return;
+  }
+
+  // Home links use "./" so clean-URL servers and GitHub Pages never redirect through index.html.
+  // On file:// a folder link would show a directory listing, so point it at index.html there.
+  if (window.location.protocol === "file:") {
+    Array.prototype.forEach.call(document.querySelectorAll('a[href="./"]'), function (a) {
+      a.setAttribute("href", "index.html");
+    });
   }
 
   // Year setter (null-safe)

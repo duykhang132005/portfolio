@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>document.documentElement.classList.add('js')</script>
   <title>Projects: Khang Nguyen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Featured projects by Khang Nguyen: ChordStrikers, Lazy Lagoon, Grove, a custom Guitar Hero instrument set and a 3D webpage for incoming Harvard students." />
@@ -9,17 +10,14 @@
   <meta property="og:title" content="Projects: Khang Nguyen" />
   <meta property="og:description" content="Featured projects by Khang Nguyen: ChordStrikers, Lazy Lagoon, Grove, a custom Guitar Hero instrument set and a 3D webpage for incoming Harvard students." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://duykhang132005.github.io/portfolio/projects.html" />
   <meta property="og:image" content="https://duykhang132005.github.io/portfolio/assets/img/IMG_1037.JPG" />
+  <link rel="canonical" href="https://duykhang132005.github.io/portfolio/projects.html" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%23e07a1f%27%2F%3E%3Cpath%20d%3D%27M21%2015v34M43%2015L23%2034M29%2030l15%2019%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Bootstrap CSS-->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
 
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -35,7 +33,7 @@
       <span class="nav-toggle-bar" aria-hidden="true"></span>
     </button>
     <nav id="site-nav" class="nav" aria-label="Primary">
-      <a href="index.html">Home</a>
+      <a href="./">Home</a>
       <a href="about.html">About</a>
       <a href="experience.html">Experience</a>
       <a href="projects.html" aria-current="page">Projects</a>
@@ -66,11 +64,11 @@
         <div class="projects-rail">
 
             <article class="project-card lift fade-up">
-              <h3>ChordStrikers</h3>
+              <h2 class="item-title">ChordStrikers</h2>
               <p>
                 A full-stack web app for creating, visualizing, and sharing musical chord progressions.
                 Made my own version of the mainstream Simply Guitar or Ultimate Guitar apps, but taking
-                my favourite features from each of them into my own personal application.
+                my favorite features from each of them into my own personal application.
               </p>
               <div class="project-card-actions">
               <a href="https://github.com/duykhang132005/Personal_Projects-ChordStrikers"
@@ -88,7 +86,7 @@
             </article>
 
             <article class="project-card lift fade-up">
-              <h3>Lazy Lagoon</h3>
+              <h2 class="item-title">Lazy Lagoon</h2>
               <p>
                 A tiny browser arcade with Snake, Minesweeper, Tic-Tac-Toe, Sudoku, 2048, and more. The inspiration for this was to unify all my childhood minigames to one place such that I can keep my high scores for each game and play even if the internet is down.
               </p>
@@ -106,7 +104,7 @@
               </div>
             </article>
             <article class="project-card lift fade-up">
-              <h3>Grove</h3>
+              <h2 class="item-title">Grove</h2>
               <p>
                 A nature-themed personal todo app. This is my current todo list app I use during school.
                 Tasks stay in your browser in this demo.
@@ -125,11 +123,12 @@
               </div>
             </article>
             <article class="project-card lift fade-up">
-              <h3>Guitar Hero: Emulating Electrical Hardware</h3>
+              <h2 class="item-title">Guitar Hero: Emulating Electrical Hardware</h2>
               <p>
                 A custom hardware gel-key instrument set for Guitar Hero, run through an emulator and built with 3D printing,
-                soldering, and SolidWorks. Microcontroller-based input cut latency by 35% (36ms to 24ms). Showcased at the 2025
-                Harvard Engineering Fair and endorsed by the Co-Founder of Guitar Hero.
+                soldering, and SolidWorks. Redesigning the material composition and weight distribution to prioritize
+                microcontroller-based input over the original marketing design cut latency by 35% (36ms to 24ms). Showcased
+                at the 2025 Harvard Engineering Fair and endorsed by the Co-Founder of Guitar Hero.
               </p>
               <div class="project-card-actions">
                 <a href="https://seas.harvard.edu/news/engineers-play"
@@ -140,11 +139,12 @@
               </div>
             </article>
             <article class="project-card lift fade-up">
-              <h3>3D Webpage for Incoming Students</h3>
+              <h2 class="item-title">3D Webpage for Incoming Students</h2>
               <p>
-                A comprehensive guide for incoming Harvard College students, with links to First-Year resources and LiDAR-scanned
-                3D models and reconstructed floor plans (Tinkercad). Presented at the CS50 Fair as a featured project and endorsed
-                by Prof. David Malan, inspiring the format of acceptance pages for future students.
+                A comprehensive guide for incoming Harvard College students, with links to all relevant First-Year resources and
+                custom LiDAR-scanned 3D models and reconstructed floor plans of rooms (Tinkercad). Presented at the CS50 Fair as
+                a featured project before industry representatives (Meta, HRT, Jane Street) and endorsed by Prof. David Malan,
+                inspiring the format of acceptance pages for future students.
               </p>
               <div class="project-card-actions">
                 <a href="https://www.youtube.com/watch?v=z1SzrQ1OyZE"
@@ -156,32 +156,6 @@
             </article>
         </div>
           </div>
-      </div>
-    </section>
-
-    <section id="project-details" class="section fade-up container">
-      <h2>Project Highlights</h2>
-
-      <div class="mt-4">
-
-        <article class="mb-4">
-          <h3>Custom Electrical Guitar and Drum Set for Guitar Hero</h3>
-          <ul class="role-list">
-            <li>Engineered a custom hardware gel-key instrument set for Guitar Hero, run through an emulator and built with 3D printing, soldering, and SolidWorks. Showcased at the 2025 Harvard Engineering Fair. You can read more about it <a href="https://seas.harvard.edu/news/engineers-play" target="_blank" rel="noopener noreferrer">here</a>.</li>
-            <li>Redesigned the material composition and weight distribution to prioritize microcontroller-based input functionality over the original marketing design, leading to a 35% latency drop from 36ms to 24ms.</li>
-            <li>Endorsed by the Co-Founder of Guitar Hero.</li>
-          </ul>
-        </article>
-
-        <article class="mb-4">
-          <h3>3D Webpage for Incoming Students</h3>
-          <ul class="role-list">
-            <li>Developed a comprehensive digital resource for incoming Harvard undergraduates, featuring links to all relevant First-Year resources and custom LiDAR-scanned 3D models and reconstructed floor plans of rooms (Tinkercad). You can watch the <a href="https://www.youtube.com/watch?v=z1SzrQ1OyZE" target="_blank" rel="noopener noreferrer">featured project</a> demo.</li>
-            <li>Presented at the CS50 Fair as a featured project before industry representatives (Meta, HRT, Jane Street), inspiring future institutional acceptance page formats.</li>
-            <li>Endorsed by Prof. David Malan.</li>
-          </ul>
-        </article>
-
       </div>
     </section>
 
@@ -213,15 +187,7 @@
 
       </div>
     </section>
-    <nav class="footer-nav" aria-label="Footer">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="experience.html">Experience</a>
-      <a href="projects.html" aria-current="page">Projects</a>
-      <a href="publication.html">Publication</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <small>&copy; <span id="year"></span> Khang Nguyen</small>
+    <small>&copy; <span id="year">2026</span> Khang Nguyen</small>
   </footer>
 <script src="js/script.js"></script>
 </body>
