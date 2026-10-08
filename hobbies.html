@@ -15,12 +15,11 @@
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Portrait of Khang Nguyen with his name and tagline" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://duykhang132005.github.io/portfolio/hobbies.html" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27%23e07a1f%27%2F%3E%3Cpath%20d%3D%27M21%2015v34M43%2015L23%2034M29%2030l15%2019%27%20fill%3D%27none%27%20stroke%3D%27%23fff%27%20stroke-width%3D%276%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
 
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -55,10 +54,17 @@
         Outside of class, I sing with two groups at Harvard: the Harvard Glee Club and The Harvard Din &amp; Tonics.
         I am also part of the Harvard Vietnamese Association.
       </p>
+
+      <!-- Subtabs: shown only when JavaScript runs; without it every section stays stacked below -->
+      <div class="hobby-tabs" role="tablist" aria-label="Hobbies">
+        <button type="button" class="hobby-tab" role="tab" id="tab-glee-club" aria-controls="glee-club" aria-selected="true">Harvard Glee Club</button>
+        <button type="button" class="hobby-tab" role="tab" id="tab-dins" aria-controls="dins" aria-selected="false" tabindex="-1">The Din &amp; Tonics</button>
+        <button type="button" class="hobby-tab" role="tab" id="tab-hva" aria-controls="hva" aria-selected="false" tabindex="-1">Harvard Vietnamese Association</button>
+      </div>
     </section>
 
     <!-- Harvard Glee Club -->
-    <section id="glee-club" class="section hobby-section fade-up container" aria-labelledby="glee-club-heading">
+    <section id="glee-club" class="section hobby-section hobby-panel is-active fade-up container" aria-labelledby="glee-club-heading">
       <h2 id="glee-club-heading">Harvard Glee Club</h2>
 
       <div class="row align-items-center mt-4">
@@ -79,8 +85,8 @@
         <div class="col-md-6">
           <figure class="hobby-figure">
             <picture>
-              <source srcset="assets/img/hobbies/glee-club.webp" type="image/webp">
-              <img src="assets/img/hobbies/glee-club.jpg" alt="The Harvard Glee Club in white tie on the steps of a brick building with columns" width="1000" height="668" decoding="async">
+              <source srcset="assets/img/hobbies/glee-club-480.webp 480w, assets/img/hobbies/glee-club.webp 1000w" sizes="(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 336px, (min-width: 576px) 516px, calc(100vw - 48px)" type="image/webp">
+              <img src="assets/img/hobbies/glee-club.jpg" srcset="assets/img/hobbies/glee-club-480.jpg 480w, assets/img/hobbies/glee-club.jpg 1000w" sizes="(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 336px, (min-width: 576px) 516px, calc(100vw - 48px)" alt="The Harvard Glee Club in white tie on the steps of a brick building with columns" width="1000" height="668" decoding="async" fetchpriority="high">
             </picture>
             <figcaption align="center">The Harvard Glee Club</figcaption>
           </figure>
@@ -89,15 +95,15 @@
     </section>
 
     <!-- The Harvard Din & Tonics -->
-    <section id="din-and-tonics" class="section hobby-section fade-up container" aria-labelledby="dins-heading">
+    <section id="dins" class="section hobby-section hobby-panel fade-up container" aria-labelledby="dins-heading">
       <h2 id="dins-heading">The Harvard Din &amp; Tonics</h2>
 
       <div class="row align-items-center mt-4">
         <div class="col-md-4">
           <figure class="hobby-figure headshot-figure">
             <picture>
-              <source srcset="assets/img/hobbies/dins-khang-headshot.webp" type="image/webp">
-              <img src="assets/img/hobbies/dins-khang-headshot.jpg" alt="Khang Nguyen in white tie with a green pocket square, holding a finger to his lips" width="600" height="600" loading="lazy" decoding="async">
+              <source srcset="assets/img/hobbies/dins-khang-headshot-480.webp 480w, assets/img/hobbies/dins-khang-headshot.webp 600w" sizes="(min-width: 1200px) 320px, (min-width: 992px) 296px, (min-width: 768px) 216px, (min-width: 368px) 320px, calc(100vw - 48px)" type="image/webp">
+              <img src="assets/img/hobbies/dins-khang-headshot.jpg" srcset="assets/img/hobbies/dins-khang-headshot-480.jpg 480w, assets/img/hobbies/dins-khang-headshot.jpg 600w" sizes="(min-width: 1200px) 320px, (min-width: 992px) 296px, (min-width: 768px) 216px, (min-width: 368px) 320px, calc(100vw - 48px)" alt="Khang Nguyen in white tie with a green pocket square, holding a finger to his lips" width="600" height="600" loading="lazy" decoding="async">
             </picture>
             <figcaption align="center">Din &amp; Tonics headshot</figcaption>
           </figure>
@@ -126,8 +132,8 @@
 
       <figure class="hobby-figure wide-figure">
             <picture>
-              <source srcset="assets/img/hobbies/dins-group.webp" type="image/webp">
-              <img src="assets/img/hobbies/dins-group.jpg" alt="The Harvard Din &amp; Tonics in white tie and black dresses, seated in a row on a stone ledge" width="1000" height="563" loading="lazy" decoding="async">
+              <source srcset="assets/img/hobbies/dins-group-480.webp 480w, assets/img/hobbies/dins-group.webp 1000w" sizes="(min-width: 992px) 900px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 24px)" type="image/webp">
+              <img src="assets/img/hobbies/dins-group.jpg" srcset="assets/img/hobbies/dins-group-480.jpg 480w, assets/img/hobbies/dins-group.jpg 1000w" sizes="(min-width: 992px) 900px, (min-width: 768px) 696px, (min-width: 576px) 516px, calc(100vw - 24px)" alt="The Harvard Din &amp; Tonics in white tie and black dresses, seated in a row on a stone ledge" width="1000" height="563" loading="lazy" decoding="async">
             </picture>
             <figcaption align = "center">The Harvard Din &amp; Tonics of 2026</figcaption>
           </figure>
@@ -154,29 +160,29 @@
       <div class="photo-grid mt-4">
           <figure class="hobby-figure">
             <picture>
-              <source srcset="assets/img/hobbies/vn-ussh-exchange.webp" type="image/webp">
-              <img src="assets/img/hobbies/vn-ussh-exchange.jpg" alt="The Harvard Din &amp; Tonics performing on stage in front of a Musical Exchange banner" width="900" height="600" loading="lazy" decoding="async">
+              <source srcset="assets/img/hobbies/vn-ussh-exchange-480.webp 480w, assets/img/hobbies/vn-ussh-exchange.webp 900w" sizes="(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 336px, (min-width: 576px) 516px, calc(100vw - 24px)" type="image/webp">
+              <img src="assets/img/hobbies/vn-ussh-exchange.jpg" srcset="assets/img/hobbies/vn-ussh-exchange-480.jpg 480w, assets/img/hobbies/vn-ussh-exchange.jpg 900w" sizes="(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 336px, (min-width: 576px) 516px, calc(100vw - 24px)" alt="The Harvard Din &amp; Tonics performing on stage in front of a Musical Exchange banner" width="900" height="600" loading="lazy" decoding="async">
             </picture>
             <figcaption align = "center">The Dins at the Musical Exchange, USSH, July 28, 2026.</figcaption>
           </figure>
           <figure class="hobby-figure">
             <picture>
-              <source srcset="assets/img/hobbies/vn-ussh-khang.webp" type="image/webp">
-              <img src="assets/img/hobbies/vn-ussh-khang.jpg" alt="Khang Nguyen in white tie standing at a microphone on stage" width="1000" height="666" loading="lazy" decoding="async">
+              <source srcset="assets/img/hobbies/vn-ussh-khang-480.webp 480w, assets/img/hobbies/vn-ussh-khang.webp 1000w" sizes="(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 336px, (min-width: 576px) 516px, calc(100vw - 24px)" type="image/webp">
+              <img src="assets/img/hobbies/vn-ussh-khang.jpg" srcset="assets/img/hobbies/vn-ussh-khang-480.jpg 480w, assets/img/hobbies/vn-ussh-khang.jpg 1000w" sizes="(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 336px, (min-width: 576px) 516px, calc(100vw - 24px)" alt="Khang Nguyen in white tie standing at a microphone on stage" width="1000" height="666" loading="lazy" decoding="async">
             </picture>
             <figcaption align = "center">Khang at the USSH Musical Exchange</figcaption>
           </figure>
           <figure class="hobby-figure">
             <picture>
-              <source srcset="assets/img/hobbies/vn-miracle-dins-impression.webp" type="image/webp">
-              <img src="assets/img/hobbies/vn-miracle-dins-impression.jpg" alt="The Harvard Din &amp; Tonics performing a comedic routine on a stage with a blue backdrop" width="900" height="600" loading="lazy" decoding="async">
+              <source srcset="assets/img/hobbies/vn-miracle-dins-impression-480.webp 480w, assets/img/hobbies/vn-miracle-dins-impression.webp 900w" sizes="(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 336px, (min-width: 576px) 516px, calc(100vw - 24px)" type="image/webp">
+              <img src="assets/img/hobbies/vn-miracle-dins-impression.jpg" srcset="assets/img/hobbies/vn-miracle-dins-impression-480.jpg 480w, assets/img/hobbies/vn-miracle-dins-impression.jpg 900w" sizes="(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 336px, (min-width: 576px) 516px, calc(100vw - 24px)" alt="The Harvard Din &amp; Tonics performing a comedic routine on a stage with a blue backdrop" width="900" height="600" loading="lazy" decoding="async">
             </picture>
             <figcaption align = "center">The Dins performing an "E.T." reference during the John Williams Medley at the Miracle Concert, July 29, 2026.</figcaption>
           </figure>
           <figure class="hobby-figure">
             <picture>
-              <source srcset="assets/img/hobbies/vn-miracle-mashup.webp" type="image/webp">
-              <img src="assets/img/hobbies/vn-miracle-mashup.jpg" alt="A large choir on a stage under a screen reading Bèo Dạt Mây Trôi and Trèo Lên Quán Dốc" width="1031" height="606" loading="lazy" decoding="async">
+              <source srcset="assets/img/hobbies/vn-miracle-mashup-480.webp 480w, assets/img/hobbies/vn-miracle-mashup.webp 1031w" sizes="(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 336px, (min-width: 576px) 516px, calc(100vw - 24px)" type="image/webp">
+              <img src="assets/img/hobbies/vn-miracle-mashup.jpg" srcset="assets/img/hobbies/vn-miracle-mashup-480.jpg 480w, assets/img/hobbies/vn-miracle-mashup.jpg 1031w" sizes="(min-width: 1400px) 636px, (min-width: 1200px) 546px, (min-width: 992px) 456px, (min-width: 768px) 336px, (min-width: 576px) 516px, calc(100vw - 24px)" alt="A large choir on a stage under a screen reading Bèo Dạt Mây Trôi and Trèo Lên Quán Dốc" width="1031" height="606" loading="lazy" decoding="async">
             </picture>
             <figcaption align = "center">Fulbright students and the Dins singing the "Bèo dạt mây trôi" and "Trèo lên quán dốc" mashup. </figcaption>
           </figure>
@@ -194,7 +200,7 @@
     </section>
 
     <!-- Harvard Vietnamese Association -->
-    <section id="hva" class="section hobby-section fade-up container" aria-labelledby="hva-heading">
+    <section id="hva" class="section hobby-section hobby-panel fade-up container" aria-labelledby="hva-heading">
       <h2 id="hva-heading">Harvard Vietnamese Association</h2>
       <p class="mt-4">
         The Harvard Vietnamese Association (HVA) celebrates Vietnamese and Vietnamese-American culture, history, and community

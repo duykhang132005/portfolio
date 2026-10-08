@@ -192,6 +192,105 @@
     place(false);
   }
 
+  // Hobbies subtabs (WAI-ARIA tabs pattern). Runs only on the hobbies page.
+  // Each tab writes its panel id to the URL hash, and hobbies.html#hva (or a
+  // link to anything inside a panel) opens the matching tab.
+  var tablist = document.querySelector('.hobby-tabs[role="tablist"]');
+  if (tablist) {
+    var tabs = Array.prototype.slice.call(tablist.querySelectorAll('[role="tab"]'));
+    var panels = tabs.map(function (tab) {
+      return document.getElementById(tab.getAttribute("aria-controls"));
+    });
+    // The Din & Tonics section was #din-and-tonics before the tabs existed
+    var hashAliases = { "#din-and-tonics": "dins" };
+    var header = document.querySelector(".site-header");
+
+    panels.forEach(function (panel, i) {
+      if (!panel) return;
+      panel.setAttribute("role", "tabpanel");
+      panel.setAttribute("aria-labelledby", tabs[i].id);
+      panel.setAttribute("tabindex", "0");
+    });
+
+    var selectTab = function (i, opts) {
+      opts = opts || {};
+      tabs.forEach(function (tab, k) {
+        var on = k === i;
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+        tab.setAttribute("tabindex", on ? "0" : "-1");
+        if (panels[k]) {
+          panels[k].classList.toggle("is-active", on);
+          panels[k].hidden = !on;
+        }
+      });
+      if (opts.focus) tabs[i].focus();
+      if (opts.updateHash && window.history && window.history.replaceState) {
+        window.history.replaceState(null, "", "#" + tabs[i].getAttribute("aria-controls"));
+      }
+    };
+
+    var hashTarget = function () {
+      var hash = window.location.hash;
+      if (!hash || hash.length < 2) return null;
+      var id = hashAliases[hash];
+      if (!id) {
+        try { id = decodeURIComponent(hash.slice(1)); } catch (err) { return null; }
+      }
+      return document.getElementById(id);
+    };
+
+    var panelIndexOf = function (el) {
+      for (var k = 0; k < panels.length; k++) {
+        if (el && panels[k] && (panels[k] === el || panels[k].contains(el))) return k;
+      }
+      return -1;
+    };
+
+    // A jump to a panel (hobbies.html#hva, or a link to #hva) should land with
+    // the tab bar still visible under the sticky header, so each panel's
+    // scroll margin covers the header plus the tab bar
+    var setScrollMargin = function () {
+      var offset = (header ? header.offsetHeight : 0) + tablist.offsetHeight + 40;
+      panels.forEach(function (panel) {
+        if (panel) panel.style.scrollMarginTop = offset + "px";
+      });
+    };
+    setScrollMargin();
+    window.addEventListener("resize", setScrollMargin);
+
+    var openFromHash = function (scroll) {
+      var target = hashTarget();
+      var i = panelIndexOf(target);
+      if (i < 0) return;
+      selectTab(i);
+      if (scroll) target.scrollIntoView();
+    };
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () {
+        selectTab(i, { updateHash: true });
+      });
+    });
+
+    tablist.addEventListener("keydown", function (e) {
+      var i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      var next = null;
+      if (e.key === "ArrowRight") next = (i + 1) % tabs.length;
+      else if (e.key === "ArrowLeft") next = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === "Home") next = 0;
+      else if (e.key === "End") next = tabs.length - 1;
+      if (next === null) return;
+      e.preventDefault();
+      selectTab(next, { focus: true, updateHash: true });
+    });
+
+    // Open the tab named in the hash before the browser jumps to the fragment;
+    // later hash changes (in-page links) switch tabs and scroll to the target
+    openFromHash(false);
+    window.addEventListener("hashchange", function () { openFromHash(true); });
+  }
+
   // IntersectionObserver reveal; respect prefers-reduced-motion; unobserve after reveal
   var revealElements = document.querySelectorAll(".fade-up, .scale-in");
 
