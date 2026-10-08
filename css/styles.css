@@ -347,7 +347,8 @@ section {
 }
 
 .section {
-  padding: 4rem 0;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 /* =========================================================
@@ -846,12 +847,6 @@ h3,
   margin-top: 0.5rem;
   font-size: 0.875rem;
   color: var(--muted);
-}
-
-/* Hobbies sections keep side padding on phones (.section resets it to 0) */
-.hobby-section {
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 #hobbies {
