@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://duykhang132005.github.io/portfolio/sitemap.xml

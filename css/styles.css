@@ -11,6 +11,11 @@
   --link: #0b5ed7;
   --link-hover: #0a58ca;
   --border: #e5e7eb;
+  /* Filled buttons, carousel arrows and the skip link: dark text on the brand orange (4.87:1; hover 5.89:1) */
+  --btn-bg: #e07a1f;
+  --btn-fg: #1f2937;
+  --btn-bg-hover: #e07a1f;
+  --btn-fg-hover: #111827;
   --radius: 10px;
 }
 
@@ -248,8 +253,8 @@ button:focus:not(:focus-visible) {
   top: 0;
   z-index: 10000;
   padding: 0.75rem 1.25rem;
-  background: var(--accent-dark);
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
   font-weight: 600;
   text-decoration: none;
   border-radius: 0 0 var(--radius) 0;
@@ -315,13 +320,17 @@ button:focus:not(:focus-visible) {
 }
 
 .nav a:hover {
-  color: var(--accent);
-  text-decoration: none;
+  color: var(--accent-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 .nav a[aria-current="page"] {
-  color: var(--accent);
-  box-shadow: 0 2px 0 var(--accent);
+  color: var(--accent-dark);
+  text-decoration: none;
+  box-shadow: 0 2px 0 var(--accent-dark);
 }
 
 .nav a:focus-visible,
@@ -329,7 +338,7 @@ button:focus:not(:focus-visible) {
 .contact-btn:focus-visible,
 .nav-toggle:focus-visible,
 .skip-link:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--accent-dark);
   outline-offset: 3px;
 }
 
@@ -385,8 +394,8 @@ h3,
    ========================================================= */
 .btn,
 .contact-btn {
-  background: var(--accent);
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
   border: none;
   border-radius: var(--radius);
   padding: 0.8rem 1.4rem;
@@ -402,8 +411,8 @@ h3,
 
 .btn:hover,
 .contact-btn:hover {
-  background: var(--accent-dark);
-  color: #fff;
+  background: var(--btn-bg-hover);
+  color: var(--btn-fg-hover);
   transform: translateY(-4px);
   box-shadow: 0 0 22px rgba(224, 122, 31, 0.45);
 }
@@ -483,8 +492,8 @@ h3,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--accent);
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -492,12 +501,13 @@ h3,
 }
 
 #featured-projects .carousel-btn:hover:not(:disabled) {
-  background: var(--accent-dark);
+  background: var(--btn-bg-hover);
+  color: var(--btn-fg-hover);
   box-shadow: 0 0 22px rgba(224, 122, 31, 0.45);
 }
 
 #featured-projects .carousel-btn:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--accent-dark);
   outline-offset: 3px;
 }
 
@@ -530,7 +540,7 @@ h3,
 }
 
 #featured-projects .projects-grid:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--accent-dark);
   outline-offset: 3px;
   border-radius: var(--radius);
 }
@@ -746,33 +756,63 @@ h3,
 /* =========================================================
    Contact page: the Get to Know Me block is the main content of the screen
    ========================================================= */
-.page-contact {
+.page-contact,
+.page-404 {
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
 }
 
-.page-contact main {
+.page-contact main,
+.page-404 main {
   flex: 1 0 auto;
   display: flex;
   align-items: center;
 }
 
-.page-contact #contact {
+.page-contact #contact,
+.page-404 #not-found {
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
 
-.page-contact #contact h1 {
+.page-contact #contact h1,
+.page-404 #not-found h1 {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
   color: var(--accent-dark);
 }
 
-.page-contact #contact p {
+.page-contact #contact p,
+.page-404 #not-found p {
   font-size: 1.25rem;
   color: var(--muted);
+}
+
+.page-404 #not-found {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.page-404 .moved-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.page-404 #not-found p {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-404 .moved-list li {
+  margin: 0.4rem 0;
+  color: var(--muted);
+}
+
+.page-404 .moved-list a {
+  font-weight: 600;
 }
 
 /* =========================================================
@@ -803,7 +843,7 @@ h3,
 
   .nav a[aria-current="page"] {
     box-shadow: none;
-    border-left: 3px solid var(--accent);
+    border-left: 3px solid var(--accent-dark);
     padding-left: 0.5rem;
   }
 }
