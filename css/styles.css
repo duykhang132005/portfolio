@@ -483,6 +483,27 @@ h3,
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
+/* Project screenshot: full-bleed 16:9 strip at the top of the card */
+.project-thumb {
+  display: block;
+  margin: -2rem -2rem 1.25rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+  background-color: var(--accent-light);
+}
+
+.project-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#featured-projects .project-thumb {
+  margin: -1.5rem -1.25rem 1rem;
+}
+
 .project-card h3,
 .project-card h2.item-title {
   margin-top: 0;
@@ -829,24 +850,10 @@ h3,
   padding-right: 1.5rem;
 }
 
-.page-404 .moved-list {
-  padding-left: 0;
-  list-style: none;
-}
-
 .page-404 #not-found p {
   max-width: 40rem;
   margin-left: auto;
   margin-right: auto;
-}
-
-.page-404 .moved-list li {
-  margin: 0.4rem 0;
-  color: var(--muted);
-}
-
-.page-404 .moved-list a {
-  font-weight: 600;
 }
 
 /* Seven nav links: tighten the header between the phone menu and wide screens so it stays on one row */
@@ -1058,5 +1065,56 @@ h3,
   .about-photo:hover,
   .lift:hover {
     transform: none;
+  }
+}
+
+/* =========================================================
+   Print: content only, no navigation, buttons or animations;
+   every hobbies tab and every project card is printed
+   ========================================================= */
+@media print {
+  .skip-link,
+  .site-header,
+  .carousel-controls,
+  .project-card-actions,
+  .hobby-tabs,
+  .footer-contact .d-flex {
+    display: none !important;
+  }
+
+  .fade-up,
+  .scale-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .js .hobby-panel:not(.is-active),
+  .js .hobby-panel[hidden] {
+    display: block !important;
+  }
+
+  #featured-projects .projects-grid.is-infinite {
+    overflow: visible;
+  }
+
+  #featured-projects .projects-grid.is-infinite .projects-rail {
+    transform: none !important;
+    flex-wrap: wrap;
+  }
+
+  #featured-projects .project-card.is-clone {
+    display: none;
+  }
+
+  #featured-projects .project-card {
+    width: 100%;
+    break-inside: avoid;
+  }
+
+  .project-card:hover,
+  .lift:hover {
+    transform: none;
+    box-shadow: none;
   }
 }

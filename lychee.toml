@@ -1,0 +1,24 @@
+# Link checker config for .github/workflows/site-checks.yml (lychee v0.24.2)
+# Internal links are checked against the files in the repo; the workflow maps
+# the site's absolute /portfolio/ paths (used by 404.html) onto the checkout.
+
+# Sites that block automated requests (they answer 403, 429 or 999 to bots)
+exclude = [
+  '^https?://([a-z0-9-]+\.)*linkedin\.com/',
+  '^https?://([a-z0-9-]+\.)*youtube\.com/',
+  '^https?://youtu\.be/',
+  '^https?://([a-z0-9-]+\.)*wiley\.com/',
+  '^https?://([a-z0-9-]+\.)*instagram\.com/',
+  '^https?://([a-z0-9-]+\.)*facebook\.com/',
+  '^https?://([a-z0-9-]+\.)*x\.com/',
+  '^https?://([a-z0-9-]+\.)*twitter\.com/',
+]
+
+max_retries = 3
+retry_wait_time = 5
+timeout = 30
+max_concurrency = 8
+accept = ["100..=103", "200..=299", "429"]
+user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 lychee"
+index_files = ["index.html"]
+no_progress = true
