@@ -223,6 +223,18 @@
           panels[k].hidden = !on;
         }
       });
+      // Each panel is one tall .fade-up block. The scroll observer waits for
+      // 20% of an element to be on screen, which a long panel (Din & Tonics)
+      // only reaches after a lot of scrolling, so reveal the opened panel
+      // here. The reflow first lets the fade play after the panel unhides.
+      var panel = panels[i];
+      if (panel) {
+        void panel.offsetWidth;
+        if (panel.matches(".fade-up, .scale-in")) panel.classList.add("visible");
+        panel.querySelectorAll(".fade-up, .scale-in").forEach(function (el) {
+          el.classList.add("visible");
+        });
+      }
       if (opts.focus) tabs[i].focus();
       if (opts.updateHash && window.history && window.history.replaceState) {
         window.history.replaceState(null, "", "#" + tabs[i].getAttribute("aria-controls"));
