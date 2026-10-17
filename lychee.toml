@@ -1,6 +1,9 @@
 # Link checker config for .github/workflows/site-checks.yml (lychee v0.24.2)
 # Internal links are checked against the files in the repo; the workflow maps
 # the site's absolute /portfolio/ paths (used by 404.html) onto the checkout.
+# The workflow runs it twice: --offline for internal links (always blocking)
+# and --scheme https/http for external links (blocking only on the weekly
+# schedule and manual runs).
 
 # Sites that block automated requests (they answer 403, 429 or 999 to bots)
 exclude = [

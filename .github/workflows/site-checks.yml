@@ -2,20 +2,26 @@
 # Actions are pinned to commit SHAs (tag in the trailing comment).
 name: Site checks
 
+# External links only block the weekly and manual runs: a third-party site
+# being briefly down should not fail an unrelated push or PR.
 on:
   push:
   pull_request:
+  schedule:
+    - cron: "17 13 * * 1" # Mondays 13:17 UTC (9:17 AM Eastern in summer)
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: site-checks-${{ github.ref }}
+  group: site-checks-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   html:
     name: HTML validation
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -36,17 +42,35 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/site"
           ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/site/portfolio"
-      - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+      # Internal links and files: always blocking
+      - name: Internal links
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
           lycheeVersion: v0.24.2
           args: >-
             --config lychee.toml
+            --offline
             --root-dir ${{ runner.temp }}/site
             './**/*.html' sitemap.xml
+          output: lychee/internal.md
           fail: true
+      # External http(s) links: reported in the job summary on every run, but
+      # only fail the run on the weekly schedule or a manual run
+      - name: External links
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          lycheeVersion: v0.24.2
+          args: >-
+            --config lychee.toml
+            --scheme https --scheme http
+            --root-dir ${{ runner.temp }}/site
+            './**/*.html' sitemap.xml
+          output: lychee/external.md
+          fail: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
 
   text:
     name: Text rules (em dashes, BOM, line endings)
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -57,6 +81,7 @@ jobs:
 
   lighthouse:
     name: Lighthouse (performance warns, accessibility fails)
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

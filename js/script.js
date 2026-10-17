@@ -47,6 +47,80 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Page transitions (see "Page transitions" in css/styles.css). The new page
+  // slides in from the right when it sits further right in the nav than the
+  // page we came from, otherwise from the left. Each page notes its place in
+  // sessionStorage as it is left, and the next page compares.
+  var root = document.documentElement;
+  var pageOrder = ["", "about", "experience", "projects", "publication", "hobbies", "contact"];
+  var pageIndexOf = function (path) {
+    var name = path.split("/").pop().replace(/\.html$/, "");
+    if (name === "index") name = "";
+    return pageOrder.indexOf(name);
+  };
+  var thisPage = pageIndexOf(window.location.pathname);
+  var rememberPage = function () {
+    try {
+      sessionStorage.setItem("pf-last-page", JSON.stringify({ i: thisPage, t: Date.now() }));
+    } catch (err) { /* storage blocked: transitions just slide forward */ }
+  };
+  // null unless we arrived from another portfolio page a moment ago
+  var cameFrom = (function () {
+    try {
+      var last = JSON.parse(sessionStorage.getItem("pf-last-page"));
+      if (last && Date.now() - last.t < 10000) return last.i;
+    } catch (err) { /* ignore */ }
+    return null;
+  })();
+  var isBack = function (from) {
+    return from !== null && from >= 0 && thisPage >= 0 && thisPage < from;
+  };
+  window.addEventListener("pageswap", rememberPage);
+  window.addEventListener("pagehide", rememberPage);
+
+  if ("onpagereveal" in window) {
+    // Cross-document view transitions run from the CSS; only the direction
+    // needs setting here
+    window.addEventListener("pagereveal", function (e) {
+      if (!e.viewTransition || !isBack(cameFrom)) return;
+      root.classList.add("page-back");
+      e.viewTransition.finished.then(function () {
+        root.classList.remove("page-back");
+      });
+    });
+  } else if (!reduceMotion) {
+    // Fallback (e.g. Firefox): play the same slide on arrival, and a short
+    // fade before leaving through an internal link
+    var mainEl = document.getElementById("main");
+    var clearEnter = function () {
+      root.classList.remove("page-in", "page-back");
+    };
+    if (cameFrom !== null && mainEl) {
+      root.classList.add("page-in");
+      if (isBack(cameFrom)) root.classList.add("page-back");
+      mainEl.addEventListener("animationend", clearEnter, { once: true });
+      setTimeout(clearEnter, 400);
+    }
+    document.addEventListener("click", function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var link = e.target.closest ? e.target.closest("a[href]") : null;
+      if (!link || link.hasAttribute("download")) return;
+      if (link.target && link.target !== "_self") return;
+      var url = new URL(link.href, window.location.href);
+      if (url.origin !== window.location.origin || !/^(https?|file):$/.test(url.protocol)) return;
+      // Same page (hash links, the Hobbies tabs) navigates as usual
+      if (url.pathname === window.location.pathname && url.search === window.location.search) return;
+      e.preventDefault();
+      rememberPage();
+      root.classList.add("page-out");
+      setTimeout(function () { window.location.href = url.href; }, 120);
+    });
+    // Coming back through the back/forward cache restores the faded page
+    window.addEventListener("pageshow", function (e) {
+      if (e.persisted) root.classList.remove("page-out", "page-in", "page-back");
+    });
+  }
+
   // Featured projects carousel: infinite loop, one card per step.
   // Real cards sit between two full sets of clones; after sliding onto a
   // clone, the rail jumps (without animation) to the matching real card.
