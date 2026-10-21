@@ -95,11 +95,22 @@
     var clearEnter = function () {
       root.classList.remove("page-in", "page-back");
     };
-    if (cameFrom !== null && mainEl) {
+    // Guard against a double slide: if a browser ever runs a native
+    // cross-document view transition without the pagereveal event, the CSS
+    // already animates the page, so the fallback stands down
+    var canMatchActive = false;
+    try { canMatchActive = CSS.supports("selector(:active-view-transition)"); } catch (err) { /* old browser */ }
+    var nativeTransitionActive = function () {
+      return !!document.activeViewTransition || (canMatchActive && root.matches(":active-view-transition"));
+    };
+    if (cameFrom !== null && mainEl && !nativeTransitionActive()) {
       root.classList.add("page-in");
       if (isBack(cameFrom)) root.classList.add("page-back");
       mainEl.addEventListener("animationend", clearEnter, { once: true });
       setTimeout(clearEnter, 400);
+      requestAnimationFrame(function () {
+        if (nativeTransitionActive()) clearEnter();
+      });
     }
     document.addEventListener("click", function (e) {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;

@@ -66,6 +66,10 @@ jobs:
             --root-dir ${{ runner.temp }}/site
             './**/*.html' sitemap.xml
           output: lychee/external.md
+          # Lets lychee check github.com links through the GitHub API, so they
+          # are not rate-limited (lychee.toml accepts 429, which would hide a
+          # broken GitHub link). The default read-only token is enough.
+          token: ${{ secrets.GITHUB_TOKEN }}
           fail: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
 
   text:
