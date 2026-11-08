@@ -311,9 +311,11 @@ button:focus:not(:focus-visible) {
   flex-wrap: wrap;
   gap: 0.75rem;
 
-  background: rgba(255, 253, 248, 0.9);
+  /* Original home orange, opaque so every page and scroll state matches. */
+  --accent-dark: #a34f10;
+  background: #fff4e6;
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid transparent;
 }
 
 .logo {
@@ -805,11 +807,6 @@ h3,
 
 .page-home .hero {
   background: transparent;
-}
-
-.page-home .site-header {
-  background: rgba(255, 244, 230, 0.85);
-  border-bottom-color: transparent;
 }
 
 .page-home .site-footer {
