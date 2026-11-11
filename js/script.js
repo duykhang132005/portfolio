@@ -32,16 +32,64 @@
   var toggle = document.querySelector(".nav-toggle");
 
   if (nav && toggle) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("open");
+    var setNavOpen = function (open) {
+      nav.classList.toggle("open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+
+    var isMobileNav = function () {
+      return window.getComputedStyle(toggle).display !== "none";
+    };
+
+    var navFocusables = function () {
+      var items = [toggle];
+      nav.querySelectorAll("a").forEach(function (link) {
+        items.push(link);
+      });
+      return items;
+    };
+
+    toggle.addEventListener("click", function () {
+      setNavOpen(!nav.classList.contains("open"));
     });
 
     nav.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
-        nav.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
+        setNavOpen(false);
       });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!nav.classList.contains("open") || !isMobileNav()) return;
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setNavOpen(false);
+        toggle.focus();
+        return;
+      }
+
+      if (e.key !== "Tab") return;
+
+      var items = navFocusables();
+      var first = items[0];
+      var last = items[items.length - 1];
+      var current = document.activeElement;
+      if (e.shiftKey) {
+        if (current === first || items.indexOf(current) === -1) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (current === last || items.indexOf(current) === -1) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    window.addEventListener("resize", function () {
+      if (nav.classList.contains("open") && !isMobileNav()) {
+        setNavOpen(false);
+      }
     });
   }
 

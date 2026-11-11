@@ -311,9 +311,9 @@ button:focus:not(:focus-visible) {
   flex-wrap: wrap;
   gap: 0.75rem;
 
-  /* Original home orange, opaque so every page and scroll state matches. */
+  /* Same token as the Home and Contact page backgrounds, opaque and uniform on every page. */
   --accent-dark: #a34f10;
-  background: #fff4e6;
+  background: var(--accent-light);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
 }
@@ -392,7 +392,7 @@ section {
 .hero {
   padding: 6rem 10vw 5rem;
   text-align: center;
-  background: linear-gradient(135deg, var(--accent-light), var(--bg));
+  background: var(--accent-light);
 }
 
 .hero h1 {
@@ -420,7 +420,6 @@ h3,
 
 .tagline {
   margin: 1rem auto 0;
-  max-width: 600px;
   font-size: 1.25rem;
   color: var(--muted);
 }
@@ -769,6 +768,14 @@ h3,
   font-weight: 700;
 }
 
+/* Replaces the empty <p class="mb-4"> under "Get to Know Me".
+   That paragraph had no height; its 1.5rem bottom margin collapsed with
+   the heading's 0.5rem to a 1.5rem (24px) gap, measured in Chrome. */
+.footer-contact .d-flex,
+#contact .d-flex {
+  margin-top: 1.5rem;
+}
+
 .page-home {
   min-height: 100vh;
   min-height: 100dvh;
@@ -796,13 +803,11 @@ h3,
 }
 
 /* =========================================================
-   Home page background: same warm gradient as the hero, across the whole tab
-   (the body background propagates to the canvas, so overscroll matches too)
+   Home (and Contact) share the nav bar color so the header joins
+   the page with no seam. Overscroll uses the same token.
    ========================================================= */
 .page-home {
-  background-color: var(--accent-light);
-  background-image: linear-gradient(135deg, var(--accent-light), var(--bg));
-  background-repeat: no-repeat;
+  background: var(--accent-light);
 }
 
 .page-home .hero {
@@ -814,8 +819,13 @@ h3,
 }
 
 /* =========================================================
-   Contact page: the Get to Know Me block is the main content of the screen
+   Contact page: the Get to Know Me block is the main content of the screen.
+   Same background token as the nav and the Home page so the header is seamless.
    ========================================================= */
+.page-contact {
+  background: var(--accent-light);
+}
+
 .page-contact,
 .page-404 {
   min-height: 100vh;
@@ -1007,6 +1017,8 @@ h3,
   .nav-toggle {
     display: flex;
     margin-left: auto;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .nav {
@@ -1022,8 +1034,11 @@ h3,
   }
 
   .nav a {
-    margin: 0.4rem 0;
-    margin-left: 0;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    margin: 0;
+    padding: 0.4rem 0;
   }
 
   .nav a[aria-current="page"] {

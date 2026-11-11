@@ -2,8 +2,8 @@
 # Actions are pinned to commit SHAs (tag in the trailing comment).
 name: Site checks
 
-# External links only block the weekly and manual runs: a third-party site
-# being briefly down should not fail an unrelated push or PR.
+# External links fail every run (push, PR, weekly, and manual). Hosts that
+# block automated checks stay in lychee.toml's exclude list.
 on:
   push:
   pull_request:
@@ -54,8 +54,8 @@ jobs:
             './**/*.html' sitemap.xml
           output: lychee/internal.md
           fail: true
-      # External http(s) links: reported in the job summary on every run, but
-      # only fail the run on the weekly schedule or a manual run
+      # External http(s) links: blocking on every run. Hosts that block bots
+      # are listed in lychee.toml (LinkedIn, YouTube, Wiley, and others).
       - name: External links
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
@@ -70,7 +70,7 @@ jobs:
           # are not rate-limited (lychee.toml accepts 429, which would hide a
           # broken GitHub link). The default read-only token is enough.
           token: ${{ secrets.GITHUB_TOKEN }}
-          fail: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+          fail: true
 
   text:
     name: Text rules (em dashes, BOM, line endings)
@@ -82,6 +82,19 @@ jobs:
         with:
           python-version: "3.12"
       - run: python scripts/check-text.py .
+
+  js-tests:
+    name: JS tests
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: lts/*
+          cache: npm
+      - run: npm ci
+      - run: npm test
 
   lighthouse:
     name: Lighthouse (performance warns, accessibility fails)

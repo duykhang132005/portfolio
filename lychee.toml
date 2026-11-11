@@ -2,8 +2,7 @@
 # Internal links are checked against the files in the repo; the workflow maps
 # the site's absolute /portfolio/ paths (used by 404.html) onto the checkout.
 # The workflow runs it twice: --offline for internal links (always blocking)
-# and --scheme https/http for external links (blocking only on the weekly
-# schedule and manual runs).
+# and --scheme https/http for external links (blocking on every run).
 
 # Sites that block automated requests (they answer 403, 429 or 999 to bots)
 exclude = [
@@ -25,3 +24,5 @@ accept = ["100..=103", "200..=299", "429"]
 user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 lychee"
 index_files = ["index.html"]
 no_progress = true
+# Installed packages and tool output (JS tests and Lighthouse)
+exclude_path = ["node_modules", "coverage", ".lighthouseci", "test-results"]

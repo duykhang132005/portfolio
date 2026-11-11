@@ -19,7 +19,7 @@ import re
 import sys
 
 EXTENSIONS = {".html", ".css", ".js", ".md", ".xml", ".txt", ".json", ".yml", ".yaml", ".toml", ".py"}
-SKIP_DIRS = {".git", "node_modules", ".lighthouseci"}
+SKIP_DIRS = {".git", "node_modules", ".lighthouseci", "coverage", "test-results"}
 # Built from pieces so this file does not match its own pattern
 AMP = "&"
 EM_DASH = re.compile("\u2014|" + AMP + "mdash;|" + AMP + "#8212;|" + AMP + "#x2014;", re.IGNORECASE)
