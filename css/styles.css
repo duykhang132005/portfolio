@@ -322,6 +322,11 @@ button:focus:not(:focus-visible) {
   font-weight: 700;
   font-size: 1.3rem;
   color: var(--accent-dark);
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--accent-dark);
 }
 
 .nav-toggle {
@@ -368,6 +373,7 @@ button:focus:not(:focus-visible) {
   box-shadow: 0 2px 0 var(--accent-dark);
 }
 
+.logo:focus-visible,
 .nav a:focus-visible,
 .btn:focus-visible,
 .contact-btn:focus-visible,
@@ -420,6 +426,8 @@ h3,
 
 .tagline {
   margin: 1rem auto 0;
+  max-width: 60ch;
+  padding-bottom: 15px;
   font-size: 1.25rem;
   color: var(--muted);
 }
