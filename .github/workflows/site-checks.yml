@@ -102,8 +102,21 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      # 404.html uses absolute /portfolio/ paths (GitHub Pages serves it at any
+      # depth), so map /portfolio/ onto the checkout for Lighthouse too.
+      - name: Map /portfolio/ onto the checkout
+        run: |
+          mkdir -p "$RUNNER_TEMP/site"
+          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/site/portfolio"
+          python3 -c '
+          import json, os
+          cfg = json.load(open("lighthouserc.json"))
+          cfg["ci"]["collect"]["staticDistDir"] = os.path.join(os.environ["RUNNER_TEMP"], "site")
+          cfg["ci"]["collect"]["url"] = [u.replace("http://localhost/", "http://localhost/portfolio/") for u in cfg["ci"]["collect"]["url"]]
+          json.dump(cfg, open(os.path.join(os.environ["RUNNER_TEMP"], "lighthouserc.json"), "w"), indent=2)
+          '
       - uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # 12.6.2
         with:
-          configPath: ./lighthouserc.json
+          configPath: ${{ runner.temp }}/lighthouserc.json
           uploadArtifacts: true
           temporaryPublicStorage: false

@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { loadPage } from "./helpers/load-page.js";
 
 function tabState(document) {
@@ -19,12 +19,14 @@ describe("hobbies subtabs", () => {
   it("starts with the Glee Club tab selected and its panel active", () => {
     const { document } = loadPage("hobbies.html");
     const { tabs, panels } = tabState(document);
-    expect(tabs).toHaveLength(3);
+    expect(tabs).toHaveLength(4);
     expect(tabs[0].id).toBe("tab-glee-club");
+    expect(tabs[3].id).toBe("tab-color-guard");
     expect(selectedIndex(tabs)).toBe(0);
     expect(panels[0].classList.contains("is-active")).toBe(true);
     expect(panels[1].classList.contains("is-active")).toBe(false);
     expect(panels[2].classList.contains("is-active")).toBe(false);
+    expect(panels[3].classList.contains("is-active")).toBe(false);
   });
 
   it("clicking a tab selects that panel and hides the others", () => {
@@ -36,18 +38,22 @@ describe("hobbies subtabs", () => {
     expect(tabs[1].getAttribute("aria-selected")).toBe("true");
     expect(tabs[0].getAttribute("aria-selected")).toBe("false");
     expect(tabs[2].getAttribute("aria-selected")).toBe("false");
+    expect(tabs[3].getAttribute("aria-selected")).toBe("false");
     expect(panels[1].hidden).toBe(false);
     expect(panels[1].classList.contains("is-active")).toBe(true);
     expect(panels[0].hidden).toBe(true);
     expect(panels[2].hidden).toBe(true);
+    expect(panels[3].hidden).toBe(true);
     expect(visibleCount(panels)).toBe(1);
 
-    tabs[2].click();
-    expect(selectedIndex(tabs)).toBe(2);
-    expect(panels[2].hidden).toBe(false);
-    expect(panels[2].classList.contains("is-active")).toBe(true);
+    tabs[3].click();
+    expect(selectedIndex(tabs)).toBe(3);
+    expect(panels[3].id).toBe("color-guard");
+    expect(panels[3].hidden).toBe(false);
+    expect(panels[3].classList.contains("is-active")).toBe(true);
     expect(panels[0].hidden).toBe(true);
     expect(panels[1].hidden).toBe(true);
+    expect(panels[2].hidden).toBe(true);
     expect(visibleCount(panels)).toBe(1);
   });
 
@@ -76,10 +82,10 @@ describe("hobbies subtabs", () => {
 
     tabs[0].focus();
     press("End", { target: tablist });
-    expect(selectedIndex(tabs)).toBe(2);
-    expect(tabs[2].id).toBe("tab-hva");
-    expect(document.activeElement).toBe(tabs[2]);
-    expect(panels[2].classList.contains("is-active")).toBe(true);
+    expect(selectedIndex(tabs)).toBe(3);
+    expect(tabs[3].id).toBe("tab-color-guard");
+    expect(document.activeElement).toBe(tabs[3]);
+    expect(panels[3].classList.contains("is-active")).toBe(true);
     expect(visibleCount(panels)).toBe(1);
 
     press("Home", { target: tablist });
