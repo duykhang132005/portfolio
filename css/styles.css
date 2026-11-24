@@ -314,7 +314,6 @@ button:focus:not(:focus-visible) {
   /* Same token as the Home and Contact page backgrounds, opaque and uniform on every page. */
   --accent-dark: #a34f10;
   background: var(--accent-light);
-  backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
 }
 
