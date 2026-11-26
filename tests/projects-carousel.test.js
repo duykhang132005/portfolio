@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { loadPage } from "./helpers/load-page.js";
 
 const EXPECTED_TITLES = [
+  "Parting Notes",
   "ChordStrikers",
   "Lazy Lagoon",
   "Grove",
@@ -10,6 +11,7 @@ const EXPECTED_TITLES = [
 ];
 
 const EXPECTED_HREFS = [
+  "https://github.com/duykhang132005/Personal_Projects-parting-notes",
   "https://github.com/duykhang132005/Personal_Projects-ChordStrikers",
   "https://duykhang132005.pythonanywhere.com/",
   "https://github.com/duykhang132005/Personal_Projects-lazy-lagoon",
@@ -64,32 +66,32 @@ describe("featured projects carousel", () => {
   });
 
   it("next and prev move to the adjacent project", () => {
-    expect(realCards(rail).map(titleOf)[0]).toBe("ChordStrikers");
+    expect(realCards(rail).map(titleOf)[0]).toBe("Parting Notes");
     nextBtn.click();
-    expect(status.textContent).toBe("Showing project 2 of 5");
-    expect(rail.style.transform).toBe("translateX(-1800px)");
+    expect(status.textContent).toBe("Showing project 2 of 6");
+    expect(rail.style.transform).toBe("translateX(-2100px)");
 
     nextBtn.click();
-    expect(status.textContent).toBe("Showing project 3 of 5");
+    expect(status.textContent).toBe("Showing project 3 of 6");
 
     prevBtn.click();
-    expect(status.textContent).toBe("Showing project 2 of 5");
+    expect(status.textContent).toBe("Showing project 2 of 6");
   });
 
   it("next wraps from the last project to the first", () => {
     for (let i = 0; i < EXPECTED_TITLES.length - 1; i++) nextBtn.click();
-    expect(status.textContent).toBe("Showing project 5 of 5");
+    expect(status.textContent).toBe("Showing project 6 of 6");
 
     nextBtn.click();
-    expect(status.textContent).toBe("Showing project 1 of 5");
+    expect(status.textContent).toBe("Showing project 1 of 6");
     // After wrapping, settle jumps back to the real first-card slot
-    expect(rail.style.transform).toBe("translateX(-1500px)");
+    expect(rail.style.transform).toBe("translateX(-1800px)");
   });
 
   it("prev wraps from the first project to the last", () => {
     prevBtn.click();
-    expect(status.textContent).toBe("Showing project 5 of 5");
-    expect(rail.style.transform).toBe("translateX(-2700px)");
+    expect(status.textContent).toBe("Showing project 6 of 6");
+    expect(rail.style.transform).toBe("translateX(-3300px)");
   });
 
   it("real cards keep their links and clones stay clickable", () => {
